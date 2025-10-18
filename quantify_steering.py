@@ -28,15 +28,15 @@ VECTORS_PATH = Path("./output/complexity_vectors.pt")
 STEERING_LAYER = 35
 
 # Test configuration
-TEST_PROMPT = "Tell me about the history of the Internet."
+# TEST_PROMPT = "Tell me about the history of the Internet."
+TEST_PROMPT = "North American opossum: friend or foe?"
 STRENGTH_MIN = -1.0
 STRENGTH_MAX = 1.0
 STRENGTH_STEP = 0.1
 
 # Generation parameters
 MAX_NEW_TOKENS = 200
-TEMPERATURE = 0.7
-TOP_P = 0.9
+# Using greedy decoding (do_sample=False) for deterministic, reproducible results
 
 # Output
 OUTPUT_DIR = Path("./output")
@@ -85,14 +85,12 @@ def generate_with_steering(
     inputs = {k: v.to(model.device) for k, v in inputs.items()}
 
     if steering_strength == 0.0:
-        # Baseline - no steering
+        # Baseline - no steering (greedy decoding)
         with torch.no_grad():
             outputs = model.generate(
                 **inputs,
                 max_new_tokens=MAX_NEW_TOKENS,
-                temperature=TEMPERATURE,
-                top_p=TOP_P,
-                do_sample=True,
+                do_sample=False,
             )
         return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
@@ -117,9 +115,7 @@ def generate_with_steering(
             outputs = model.generate(
                 **inputs,
                 max_new_tokens=MAX_NEW_TOKENS,
-                temperature=TEMPERATURE,
-                top_p=TOP_P,
-                do_sample=True,
+                do_sample=False,
             )
         generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     finally:
