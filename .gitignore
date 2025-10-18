@@ -9,5 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
+# Data
+data/
+
 # Output files
 output/

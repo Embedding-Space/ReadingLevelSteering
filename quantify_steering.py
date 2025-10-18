@@ -24,7 +24,7 @@ from typing import Dict
 # Configuration
 MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"
 DEVICE = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
-VECTORS_PATH = Path("./output/tedium_vectors.pt")
+VECTORS_PATH = Path("./output/complexity_vectors.pt")
 STEERING_LAYER = 35
 
 # Test configuration
@@ -60,24 +60,24 @@ def load_model_and_tokenizer():
     return model, tokenizer
 
 
-def load_tedium_vector() -> torch.Tensor:
-    """Load the tedium vector for the target layer."""
+def load_complexity_vector() -> torch.Tensor:
+    """Load the complexity vector for the target layer."""
     print(f"\n{'='*80}")
-    print(f"Loading tedium vector from layer {STEERING_LAYER}")
+    print(f"Loading complexity vector from layer {STEERING_LAYER}")
     print(f"{'='*80}\n")
 
     vectors = torch.load(VECTORS_PATH)
-    tedium_vector = vectors[STEERING_LAYER]
+    complexity_vector = vectors[STEERING_LAYER]
 
-    print(f"✓ Loaded vector with dimension {tedium_vector.shape[0]}")
-    return tedium_vector
+    print(f"✓ Loaded vector with dimension {complexity_vector.shape[0]}")
+    return complexity_vector
 
 
 def generate_with_steering(
     model,
     tokenizer,
     prompt: str,
-    tedium_vector: torch.Tensor,
+    complexity_vector: torch.Tensor,
     steering_strength: float,
 ) -> str:
     """Generate text with specified steering strength."""
@@ -97,7 +97,7 @@ def generate_with_steering(
         return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     # Apply steering
-    steering_vector = tedium_vector.to(model.device) * steering_strength
+    steering_vector = complexity_vector.to(model.device) * steering_strength
 
     def steering_hook(module, input, output):
         if isinstance(output, tuple):
@@ -172,10 +172,10 @@ def analyze_text(text: str) -> Dict[str, float]:
         }
 
 
-def run_experiment(model, tokenizer, tedium_vector):
+def run_experiment(model, tokenizer, complexity_vector):
     """Run steering experiment across range of strengths."""
     print(f"\n{'='*80}")
-    print(f"Running Quantitative Steering Analysis")
+    print(f"Running Quantitative Steering Analysis (Complexity Vector)")
     print(f"{'='*80}")
     print(f"\nConfiguration:")
     print(f"  - Prompt: {TEST_PROMPT}")
@@ -194,7 +194,7 @@ def run_experiment(model, tokenizer, tedium_vector):
         print(f"Testing strength {strength:+.1f}...")
 
         # Generate text
-        full_text = generate_with_steering(model, tokenizer, TEST_PROMPT, tedium_vector, strength)
+        full_text = generate_with_steering(model, tokenizer, TEST_PROMPT, complexity_vector, strength)
 
         # Extract only generated portion (after prompt)
         generated_text = full_text[len(TEST_PROMPT):].strip()
@@ -289,10 +289,10 @@ def main():
 
     # Load model and vectors
     model, tokenizer = load_model_and_tokenizer()
-    tedium_vector = load_tedium_vector()
+    complexity_vector = load_complexity_vector()
 
     # Run experiment
-    df = run_experiment(model, tokenizer, tedium_vector)
+    df = run_experiment(model, tokenizer, complexity_vector)
 
     # Save results
     csv_path = OUTPUT_DIR / "steering_quantitative_results.csv"
