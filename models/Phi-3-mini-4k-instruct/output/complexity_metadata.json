@@ -1,0 +1,8 @@
+{
+  "model_name": "microsoft/Phi-3-mini-4k-instruct",
+  "num_pairs": 20,
+  "data_source": "Wikipedia pairs (Simple vs Regular)",
+  "num_layers": 32,
+  "device": "mps",
+  "seed": 42
+}
