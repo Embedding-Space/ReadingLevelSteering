@@ -29,10 +29,10 @@ STEERING_LAYER = 35
 
 # Test configuration
 # TEST_PROMPT = "Tell me about the history of the Internet."
-TEST_PROMPT = "North American opossum: friend or foe?"
-STRENGTH_MIN = -1.0
-STRENGTH_MAX = 1.0
-STRENGTH_STEP = 0.1
+TEST_PROMPT = "Can you explain quantum mechanics please?"
+STRENGTH_MIN = -5.0
+STRENGTH_MAX = 5.0
+STRENGTH_STEP = 0.25
 
 # Generation parameters
 MAX_NEW_TOKENS = 200
@@ -81,7 +81,15 @@ def generate_with_steering(
     steering_strength: float,
 ) -> str:
     """Generate text with specified steering strength."""
-    inputs = tokenizer(prompt, return_tensors="pt")
+    # Format prompt using chat template for instruct model
+    messages = [{"role": "user", "content": prompt}]
+    formatted_prompt = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True
+    )
+
+    inputs = tokenizer(formatted_prompt, return_tensors="pt")
     inputs = {k: v.to(model.device) for k, v in inputs.items()}
 
     if steering_strength == 0.0:
@@ -192,8 +200,23 @@ def run_experiment(model, tokenizer, complexity_vector):
         # Generate text
         full_text = generate_with_steering(model, tokenizer, TEST_PROMPT, complexity_vector, strength)
 
-        # Extract only generated portion (after prompt)
-        generated_text = full_text[len(TEST_PROMPT):].strip()
+        # Extract only the assistant's response (after chat template formatting)
+        # Split on the assistant marker and take everything after it
+        if "<|im_start|>assistant\n" in full_text:
+            generated_text = full_text.split("<|im_start|>assistant\n", 1)[1]
+        elif "assistant\n" in full_text:
+            # Sometimes the special token gets decoded as just "assistant\n"
+            generated_text = full_text.split("assistant\n", 1)[1]
+        else:
+            # Fallback: just remove the original prompt
+            generated_text = full_text[len(TEST_PROMPT):].strip()
+
+        # Clean up any trailing special tokens
+        for token in ["<|im_end|>", "<|endoftext|>"]:
+            if token in generated_text:
+                generated_text = generated_text.split(token)[0]
+
+        generated_text = generated_text.strip()
 
         # Analyze
         metrics = analyze_text(generated_text)
