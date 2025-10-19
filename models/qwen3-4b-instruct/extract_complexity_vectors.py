@@ -29,7 +29,7 @@ from tqdm import tqdm
 # Configuration
 MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"
 DEVICE = "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
-DATA_PATH = Path("./data/wikipedia_pairs/wikipedia_pairs.json")
+DATA_PATH = Path("../../data/wikipedia_pairs/wikipedia_pairs.json")
 OUTPUT_DIR = Path("./output")
 SEED = 42
 
