@@ -1,0 +1,8 @@
+{
+  "model_name": "google/gemma-3-4b-it",
+  "num_pairs": 20,
+  "data_source": "Wikipedia pairs (Simple vs Regular)",
+  "num_layers": 34,
+  "device": "mps",
+  "seed": 42
+}

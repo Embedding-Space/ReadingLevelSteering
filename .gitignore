@@ -15,5 +15,5 @@ wheels/
 # Data
 data/
 
-# Output files
-output/
+# Output files - vectors are huge, but plots/data are documentation
+**/*.pt
