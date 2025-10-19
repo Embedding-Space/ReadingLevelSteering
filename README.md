@@ -4,11 +4,25 @@
 
 ---
 
+## Abstract
+
+The [Persona Vectors paper](https://arxiv.org/abs/2507.21509) showed you can steer AI behavior by manipulating activation space geometry—identifying directions that correspond to behavioral traits and nudging the model along those dimensions during inference. No fine-tuning, no retraining. Just vector addition in the right place.
+
+We asked: does reading-level complexity have a similar steerable dimension? Can you extract a "complexity vector" that moves outputs along a simple-to-sophisticated axis?
+
+Using contrastive activation analysis on matched Wikipedia article pairs (Simple English vs. standard English, same topics), we captured how models represent stylistic complexity internally. The method worked: applying the extracted vector with coefficient α produces **linear control over reading level** with R² = 0.90. The relationship is clean, predictable, and robust across the effective range (α = -4 to +4). Beyond that, models degenerate into repetition—documenting the boundary of steerable space.
+
+---
+
 ## What We Found
 
 This project demonstrates **reading-level steering** - controlling how simple or complex an LLM's output is by adding a learned vector to its activations during generation.
 
 ### Key Results
+
+![**Figure 1: Linear steering control in Qwen 3 4B.** Left: Flesch-Kincaid grade level increases 1.28 grades per unit α (R²=0.896). Right: Reading ease decreases 8.14 points per unit α (R²=0.895). Both relationships are highly significant (p<0.001) across the effective range α=-4 to +4.](models/qwen3-4b-instruct/output/linear_regression_combined.png)
+
+**Figure 1: Linear steering control in Qwen 3 4B.** Left: Flesch-Kincaid grade level increases 1.28 grades per unit α (R²=0.896). Right: Reading ease decreases 8.14 points per unit α (R²=0.895). Both relationships are highly significant (p<0.001) across the effective range α=-4 to +4.
 
 | Metric | Effect | R² | p-value |
 |--------|--------|-----|---------|
@@ -67,7 +81,7 @@ This structure supports multi-model comparison. Each model gets its own folder u
 
 ### 1. Vector Extraction
 
-We use **contrastive activation analysis** (inspired by [persona vectors](https://arxiv.org/abs/2310.07157)) to extract a "complexity vector":
+We use **contrastive activation analysis** (inspired by [persona vectors](https://arxiv.org/abs/2507.21509)) to extract a "complexity vector":
 
 1. **Matched pairs:** Simple Wikipedia + Regular Wikipedia articles on the same 20 topics
 2. **Capture activations:** Run both versions through Qwen3-4B-Instruct, save hidden states at all layers
@@ -103,7 +117,7 @@ This is pure vector addition in activation space - no retraining, no fine-tuning
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/TediumVectorTinker.git
+git clone https://github.com/Embedding-Space/TediumVectorTinker.git
 cd TediumVectorTinker
 
 # Install with uv (recommended)
@@ -118,7 +132,7 @@ pip install torch transformers accelerate datasets matplotlib pandas scipy texts
 #### Step 1: Prepare Data
 
 ```bash
-python prepare_wikipedia_pairs.py
+uv run prepare_wikipedia_pairs.py
 ```
 
 Fetches 20+ matched Simple/Regular Wikipedia article pairs and validates reading level differences.
@@ -295,7 +309,7 @@ If you build on this work:
 
 This project emerged from a Saturday afternoon tinker session exploring "tedium vectors" in activation space. What started as curiosity evolved into clean linear control with R² = 0.90.
 
-Methodology inspired by [Persona Vectors (Tigges et al., 2023)](https://arxiv.org/abs/2310.07157).
+Methodology inspired by [Persona Vectors (Tigges et al., 2023)](https://arxiv.org/abs/2507.21509).
 
 ---
 
