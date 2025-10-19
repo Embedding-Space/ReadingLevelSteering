@@ -285,7 +285,7 @@ If you build on this work:
   author = {Harrell, Jeffery and Alpha},
   title = {Reading-Level Steering for Large Language Models},
   year = {2025},
-  url = {https://github.com/yourusername/TediumVectorTinker}
+  url = {https://github.com/Embedding-Space/TediumVectorTinker}
 }
 ```
 
