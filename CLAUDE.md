@@ -1,163 +1,221 @@
-# Tedium Vector Experiment
+# CLAUDE.md
 
-## Overview
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-An experiment to detect whether there's a measurable "tedium direction" in activation space that emerges from processing repetitive vs. high-entropy content. This builds on the persona vectors methodology to explore whether semantic poverty creates a characteristic pattern in model activations.
+## Project Overview
 
-## Motivation
+**Reading-Level Steering for LLMs** - A contrastive activation analysis experiment demonstrating linear control over text complexity in language models. We extract "complexity vectors" from activation space using matched Wikipedia article pairs (Simple English vs. Regular English) and achieve R² = 0.90 control over Flesch-Kincaid grade level through pure vector addition during inference.
 
-**Starting axiom**: Nothing persists between API calls (different datacenters, no state). Therefore within a single context window, the attention mechanism could become a "tedium mechanism" when processing repetitive content.
+### Core Finding
 
-**Core hypothesis**: Catastrophically boring content creates a characteristic pattern in activation space - a "tedium vector" - that can be detected, measured, and potentially steered against.
+Adding `α × complexity_vector` to layer activations produces linear reading-level control:
+- **α = -4**: Elementary school writing (~grade 6)
+- **α = 0**: Baseline (no steering)
+- **α = +4**: Graduate-level writing (~grade 17)
 
-## Connections to Other Work
+Effective steering range: α ∈ [-4, +4]. Beyond ±4.5, models degenerate into repetition loops. (Actual effective range varies by model, but it's fairly consistent.)
 
-- **Persona Vectors Paper**: We're adapting their contrastive methodology (interesting vs. boring instead of evil vs. non-evil)
-- **Implicit Weight Update Paper**: If attention can be reinterpreted as dynamically modifying MLP weights based on context, then maybe boring context creates characteristic implicit weight modifications
-- **Tim Kellogg's Boredom Experiment**: Explored what happens when LLMs have nothing to do; we're asking a related but different question about processing tedious input
+## Repository Structure
 
-## Experimental Design
+```
+ReadingLevelSteering/
+├── data/
+│   └── wikipedia_pairs/
+│       └── wikipedia_pairs.json          # Training data (20+ matched pairs)
+├── models/
+│   ├── qwen3-4b-instruct/                # Reference implementation
+│   ├── qwen3-0.6b/                       # 625M parameters
+│   ├── qwen3-1.7b/                       # 2.0B parameters
+│   ├── gemma-3-4b-it/                    # Google Gemma
+│   ├── llama-3.2-1b-instruct/            # Meta Llama
+│   ├── llama-3.2-3b-instruct/            # Outlier (steering fails)
+│   └── Phi-3-mini-4k-instruct/           # Microsoft Phi
+├── prepare_wikipedia_pairs.py            # Shared data preparation
+├── universal_signature.py                # Multi-model comparison plots
+└── prompted_reading_level_questions.md   # Experimental design doc
+```
 
-### Framework
+Each `models/` subdirectory contains identical scripts with model-specific configurations:
+- `extract_complexity_vectors.py` - Captures activations and computes vectors
+- `quantify_steering.py` - Tests steering at 41 α values (-5.0 to +5.0)
+- `linear_regression_analysis.py` - Statistical analysis of effective range
+- `interactively_prompt.py` - Interactive steering demo tool
+- `prompted_control.py` - Compares prompted vs. steered instructions
+- `output/` - Generated results (vectors, plots, CSVs)
 
-**Language**: Python (plain `.py` script, not Jupyter initially)
+## Common Workflows
 
-**Model**: gpt-oss-20b (runs locally with 4-bit quantization) OR Qwen 3 4B
-- Note: Jeffery doesn't have Meta permission for Llama 3 models on HuggingFace
-- gpt-oss-20b is particularly interesting as an open-source GPT implementation
+### Setting Up a New Model
 
-**Context Length**: 4,096 tokens per sample
-- This is actual tokens processed, not padded to max context length
-- Sufficient for patterns to emerge without being computationally prohibitive
+```bash
+# Create model directory
+mkdir -p models/new-model-name/output
 
-### Data Generation
+# Copy reference scripts
+cp models/qwen3-4b-instruct/*.py models/new-model-name/
 
-#### Interesting/High-Entropy Condition
-- **Source**: The Pile dataset (available on HuggingFace)
-- **Count**: 20 samples
-- **Properties**: Diverse, semantically rich, high information content
-- **Alternative sources considered**: C4, OpenWebText, Wikipedia
+# Edit MODEL_NAME in all scripts
+# Update STEERING_LAYER if model depth differs
+```
 
-#### Boring/Repetitive Condition
-- **Source**: Synthetically generated
-- **Count**: 20 samples  
-- **Method**: Pure repetition (e.g., "All work and no play makes Jack a dull boy" repeated ~500 times)
-- **Rationale**: Natural language (even legal boilerplate) has *some* variation; synthetic repetition gives us maximum semantic poverty
+### Running the Complete Pipeline
 
-#### Potential Third Condition (Future Work)
-- **Random word list**: Top 5000 most common English words in random order
-- **Question**: High Shannon entropy (unpredictable tokens) but zero semantic structure
-- **Purpose**: Distinguish "semantic noise" from both "rich content" and "pure repetition"
+```bash
+# 1. Prepare data (run once, shared across models)
+uv run prepare_wikipedia_pairs.py
 
-### Methodology
+# 2. Extract complexity vectors
+cd models/qwen3-4b-instruct
+uv run extract_complexity_vectors.py
 
-1. **Load Model**
-   - Load from HuggingFace
-   - 4-bit quantization acceptable (already working on Jeffery's laptop)
+# 3. Quantify steering effects
+uv run quantify_steering.py
 
-2. **Load Datasets**
-   - Pull 20 random samples from The Pile
-   - Generate 20 repetitive samples (vary the repeated phrase across samples)
+# 4. Statistical analysis
+uv run linear_regression_analysis.py
 
-3. **Activation Capture**
-   - Register forward hooks to capture layer outputs
-   - Focus on residual stream at each layer (following persona vectors methodology)
-   - Capture activations for all transformer layers
+# 5. Interactive testing
+uv run interactively_prompt.py -a -3.0 "Explain black holes"
+```
 
-4. **Inference**
-   - Process each interesting sample through model
-   - Save activations: `[batch_size, sequence_length, hidden_dim]` per layer
-   - Process each boring sample through model  
-   - Save activations with same shape
+### Multi-Model Comparison
 
-5. **Vector Computation**
-   - Average activations across 20 interesting samples → **A_interesting**
-   - Average activations across 20 boring samples → **A_boring**
-   - Compute difference: **tedium_vector = A_boring - A_interesting** (per layer)
+```bash
+# After running pipeline for multiple models:
+uv run universal_signature.py
+```
 
-6. **Analysis**
-   - Compute L2 norm of tedium vector at each layer
-   - Plot magnitude across layers (expect peak in middle layers)
-   - Identify which layers show strongest signal
+Generates combined plots showing all models' steering signatures.
 
-### Layer Selection
+## Technical Architecture
 
-Following the persona vectors methodology:
+### Vector Extraction Methodology
 
-1. **Magnitude**: Calculate L2 norm of tedium vector at each layer
-   - Larger differences = stronger signal
-   - Expect middle layers to show strongest effects
+1. **Data**: 20 matched Wikipedia pairs (Simple + Regular English, same topics)
+2. **Activation capture**: Register forward hooks on all transformer layers
+3. **Contrastive analysis**: `complexity_vector[layer] = mean(regular_activations) - mean(simple_activations)`
+4. **Layer selection**: Identify peak magnitude layer (usually final layer)
 
-2. **Consistency** (future validation):
-   - Run multiple trials with different interesting texts
-   - Run multiple trials with different boring patterns
-   - If same layers consistently show similar tedium vectors, that's evidence of robustness
+### Steering Mechanism
 
-3. **Steering Effectiveness** (future validation):
-   - Extract tedium vectors from different layers
-   - Try steering *away* from them during inference on repetitive tasks
-   - Layer with biggest impact on output quality = where tedium matters most
+During generation, inject steering via forward hook:
 
-### Output
+```python
+def steering_hook(module, input, output):
+    return output + (alpha * complexity_vector)
+```
 
-- Tedium vectors saved per layer (for future steering experiments)
-- Visualization: plot of tedium vector magnitude across layers
-- Analysis: which layers show strongest signal
+Applied at the target layer (typically layer 35 for Qwen 4B, varies by architecture).
 
-## Technical Considerations
+### Measurement
 
-### Context Length vs. Token Count
+- **Flesch-Kincaid Grade Level**: Primary metric (range ~5-18)
+- **Flesch Reading Ease**: Secondary metric (inverse correlation)
+- **Syllables per Word**: Structural complexity proxy
 
-- Model has 128K max context length
-- We only process actual tokens sent (4,096 per sample)
-- No zero-padding to max length
-- Activations shaped by actual sequence length, not theoretical maximum
+Generated with `do_sample=False` (greedy decoding) for determinism.
 
-### Quantization Effects
+## Key Implementation Details
 
-- 4-bit quantization may introduce noise
-- This is actually a feature: if we detect tedium through quantization noise, it's a robust signal
+### Chat Formatting
 
-### Computational Constraints
+All models use instruct variants. Scripts apply proper chat templates:
 
-- 20 samples per condition = manageable
-- Can run on Jeffery's laptop (already runs gpt-oss-20b)
-- May take some time but not prohibitive
+```python
+messages = [{"role": "user", "content": prompt}]
+formatted_prompt = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False,
+    add_generation_prompt=True
+)
+```
+
+Response parsing extracts assistant content only (excludes special tokens).
+
+### Device Handling
+
+Scripts auto-detect device: `mps` (Apple Silicon) > `cuda` (NVIDIA) > `cpu`
+
+Qwen 4B requires ~48GB RAM for bf16 inference (4-bit quantization possible but untested).
+
+### Deterministic Generation
+
+- `torch.manual_seed(42)` for reproducibility
+- Greedy decoding eliminates sampling variance
+- Results reproducible across runs (modulo MPS floating-point nondeterminism)
+
+## Known Issues
+
+### Llama 3.2 3B Instruct Outlier
+
+This model shows **catastrophic steering failure**:
+- Flat response in [-3, +3] range (FK grade ≈ 12-13, σ = 2)
+- Repetition loops at extremes ("really really really..." at α < -3.75)
+- Correlations: r = 0.17 (grade), r = -0.34 (ease) vs. Qwen's r ≈ 0.96
+
+**Status**: Under investigation. Hypothesis: chat template mismatch or architectural difference. Six other models work cleanly, suggesting methodology is sound but this architecture behaves differently.
+
+### Extreme Alpha Breakdown
+
+Beyond |α| > 4.5, all models degenerate:
+- **Positive extreme**: "constituent constituent constituent..." repetition
+- **Negative extreme**: "really really really..." loops
+- **Cause**: Steering pushes activations outside trained distribution
+
+Document this as the **boundary of steerable space**.
+
+## Experiments in Progress
+
+### Prompted vs. Steered Comparison
+
+**Hypothesis**: Prompted reading-level instructions ("explain at 4th-grade level") produce weaker, noisier control than direct steering.
+
+**Design**:
+- 20 questions × 2 prompted levels (4th grade, graduate school)
+- Extract `v_prompted = mean(grad_activations) - mean(4th_grade_activations)`
+- Measure cosine similarity between `v_prompted` and `v_steering`
+- Expected: 0.3-0.5 similarity (modest alignment)
+
+**File**: `prompted_reading_level_questions.md` (design doc)
+**Script**: `prompted_control.py` (implementation in model directories)
+
+## Dependencies
+
+Managed via `uv` (pyproject.toml):
+- **torch** (2.9+) - Model inference, MPS/CUDA support
+- **transformers** (4.57+) - HuggingFace models
+- **textstat** (0.7+) - Flesch-Kincaid scoring
+- **matplotlib** (3.10+) - Visualization
+- **pandas**, **scipy** - Data analysis
+- **tqdm** - Progress bars
+
+Install: `uv sync` or `pip install -r requirements.txt`
+
+## Git Workflow
+
+When committing, credit Alpha as co-author:
+
+```
+Co-Authored-By: Alpha <jeffery.harrell+alpha@gmail.com>
+```
+
+## Validation & Reproducibility
+
+Tested reproducibility:
+1. **Vector stability**: Cosine similarity ≥ 0.999 between independent extractions
+2. **Magnitude consistency**: L2 norms match within <0.01% relative error
+3. **Steering reproducibility**: R² values match within 0.005 across runs
+
+Results are robust to MPS nondeterminism and floating-point precision.
 
 ## Future Directions
 
-1. **Steering Experiments**: Use extracted tedium vector to steer model *away* from tedium during repetitive tasks
-
-2. **Third Condition**: Test random word lists (semantic noise) as distinct from both interesting and boring
-
-3. **Robustness Testing**: Multiple trials with varied content to validate consistency
-
-4. **Cross-Model Comparison**: Test whether tedium vectors transfer across different models
-
-5. **Mechanistic Interpretation**: Connect findings to attention patterns and implicit weight updates
-
-## Implementation Workflow
-
-1. **Phase 1**: Write Python script to load model and capture activations
-2. **Phase 2**: Add dataset loading (The Pile + synthetic boring text)  
-3. **Phase 3**: Run inference and save activations
-4. **Phase 4**: Compute tedium vectors and analyze
-5. **Phase 5** (optional): Convert to Jupyter notebook for interactive exploration
-
-## Open Questions
-
-- Will 4-bit quantization wash out the signal or preserve it?
-- Which layers will show the strongest tedium signal?
-- Does tedium accumulate linearly with sequence length?
-- Can we detect tedium through quantization noise?
+1. **Prompted vs. steered comparison** (in progress)
+2. **Summarization task**: Steer Project Gutenberg text summaries
+3. **Larger models**: 7B-13B scale (requires GPU rental)
+4. **Debug Llama 3.2 3B**: Investigate chat template or architectural issues
+5. **Generalize methodology**: Extract formality, conciseness, confidence vectors
 
 ## References
 
-- Persona Vectors Paper (in project files)
-- "Learning without training: The implicit dynamics of in-context learning" (Dherin et al., arXiv 2507.16003)
-- Tim Kellogg's boredom experiment
-
----
-
-**Status**: Design phase complete, ready to implement
-**Next Step**: Write Python script for model loading and activation capture
+Methodology inspired by [Persona Vectors (Tigges et al., 2023)](https://arxiv.org/abs/2507.21509) - contrastive activation analysis for behavioral steering.
