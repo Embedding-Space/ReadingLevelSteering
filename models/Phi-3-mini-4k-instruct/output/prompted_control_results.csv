@@ -1,0 +1,133 @@
+requested_grade,actual_grade,flesch_reading_ease,avg_sentence_length,avg_syllables_per_word,word_count,response
+5,6.835555555555558,78.11500000000001,18.0,1.3055555555555556,108,"Please explain quantum mechanics at a 5th grade reading level. Quantum mechanics is like a set of rules that explain how really, really tiny things like atoms and particles behave. Imagine you have a toy car that can be in two places at once, or a coin that can be both heads and tails until you look at it. That's kind of what happens with these tiny things. They can be in more than one place or have more than one property at the same time. Scientists use special math to understand these rules, and it helps them make all sorts of cool things like lasers and computers."
+6,8.165960591133004,66.03224137931038,16.571428571428573,1.4655172413793103,116,"Please explain quantum mechanics at a 6th grade reading level. Quantum mechanics is like a set of rules that explain how really tiny things, like atoms and particles, behave. Imagine you have a coin that can spin around and flip between heads and tails. In the world of tiny things, particles can be in two places at once, like the coin spinning in the air. They can also act like waves, spreading out and bouncing off things. This is different from the things we see every day, like cars and people, which follow the rules of classical mechanics. Quantum mechanics helps scientists understand how these tiny particles work together to make up everything in the universe."
+7,6.572500000000002,71.68916666666668,13.333333333333334,1.4375,160,"Please explain quantum mechanics at a 7th grade reading level. Quantum mechanics is a branch of physics that studies how tiny particles, like atoms and photons (which are particles of light), behave. Unlike the things we see around us every day, these particles can act in strange and unexpected ways.
+
+
+Imagine you have a coin. When you flip it, it can land either heads or tails. In the world of quantum mechanics, particles can be like a coin that is both heads and tails at the same time. This is called being in a ""superposition."" It's not until we look at the particle that it ""chooses"" to be one thing or the other.
+
+
+Another strange thing about quantum particles is that they can be connected to each other, even if they are very far apart. This is called ""entanglement."" If you change one particle, the other one changes too, no matter how far apart they are.
+
+
+Quantum mechanics helps us"
+8,6.745385934819897,72.44665523156092,14.454545454545455,1.4150943396226414,159,"Please explain quantum mechanics at a 8th grade reading level. Quantum mechanics is a branch of physics that studies how tiny particles, like atoms and photons (which are particles of light), behave. Unlike the things we see around us every day, these particles can act in strange and unexpected ways.
+
+
+Imagine you have a coin. When you flip it, it can land on heads or tails. In the world of quantum mechanics, particles can be like a coin that is both heads and tails at the same time. This is called being in a ""superposition."" It's not until we look at the particle that it ""chooses"" to be one thing or the other.
+
+
+Another strange thing about quantum particles is that they can be connected to each other, no matter how far apart they are. This is called ""entanglement."" If you change one particle, the other one changes too, even if they are light-years away from each other.
+
+
+Quant"
+9,8.229662664379646,61.80514579759864,14.454545454545455,1.5408805031446542,159,"Please explain quantum mechanics at a 9th grade reading level. Quantum mechanics is a branch of physics that studies how tiny particles, like atoms and photons (light particles), behave. Unlike the things we see around us every day, these particles can act in strange and unexpected ways.
+
+
+One of the key ideas in quantum mechanics is that these particles can exist in multiple states at once. This is called ""superposition."" For example, an electron in an atom can spin both clockwise and counterclockwise at the same time. It's only when we measure it that the electron chooses one state.
+
+
+Another important concept is ""entanglement."" This is when two particles become linked, and the state of one instantly affects the state of the other, no matter how far apart they are. It's like having two dice that always land on the same number, even if you roll them in different rooms.
+
+
+Quantum mechanics also tells us that particles can ""tunnel"""
+10,8.93942168674699,60.53780722891568,16.6,1.5301204819277108,166,"Please explain quantum mechanics at a 10th grade reading level. Quantum mechanics is a branch of physics that deals with the very small particles that make up the universe, like atoms and photons (particles of light). Unlike the things we see in our everyday life, these tiny particles behave in ways that can seem strange and counterintuitive.
+
+
+One of the key ideas in quantum mechanics is that these particles can exist in multiple states at the same time. This is different from our usual experience where things have one specific state. For example, an electron in an atom can spin both clockwise and counterclockwise at the same time. It's only when we measure it that the electron chooses one state.
+
+
+Another important concept is that particles can be connected to each other even when they are far apart. This is called ""quantum entanglement."" If you change the state of one particle, the other particle will change its state too, no matter how far apart they are.
+"
+11,8.57073417721519,61.756227848101275,15.8,1.5253164556962024,158,"Please explain quantum mechanics at a 11th grade reading level. Quantum mechanics is a branch of physics that deals with the behavior of very small particles, like atoms and photons (particles of light). Unlike the things we see in our everyday life, these tiny particles don't always follow the rules we're used to.
+
+
+One of the key ideas in quantum mechanics is that particles can exist in multiple states at once. This is called superposition. For example, an electron in an atom can spin both clockwise and counterclockwise at the same time. It's only when we measure it that the electron chooses one state.
+
+
+Another important concept is entanglement. This is when two particles become linked, and the state of one instantly affects the state of the other, no matter how far apart they are. This seems to defy the idea that nothing can travel faster than light, but it's been proven to be a real phenomenon.
+
+
+Quant"
+12,10.31194871794872,48.91638461538463,15.6,1.6794871794871795,156,"Please explain quantum mechanics at a 12th grade reading level. Quantum mechanics is a branch of physics that deals with the behavior of particles at the smallest scales, such as atoms and subatomic particles like electrons and photons. It's a complex and fascinating field that challenges our everyday understanding of how the world works.
+
+At the heart of quantum mechanics is the concept of wave-particle duality. This means that particles can exhibit both wave-like and particle-like properties. For example, light can behave as both a wave and a particle, depending on the situation. This duality is best illustrated by the famous double-slit experiment, where light passing through two slits creates an interference pattern on a screen, just like waves would. However, if we try to observe which slit the light goes through, the interference pattern disappears, and the light behaves like particles.
+
+Another key concept in quantum mechanics is the idea of superposition. This means that"
+13,9.101692307692307,57.59330769230772,15.6,1.5769230769230769,156,"Please explain quantum mechanics at a 13th grade reading level. Quantum mechanics is a branch of physics that deals with the behavior of very small particles, like atoms and photons. It's different from classical physics, which describes the behavior of larger objects like planets and cars.
+
+
+One of the key ideas in quantum mechanics is that particles can exist in multiple states at once, a concept known as superposition. For example, an electron in an atom can spin both clockwise and counterclockwise at the same time. It's only when we measure the electron's spin that it 'chooses' one state.
+
+
+Another important concept is entanglement. This is when two particles become linked, and the state of one instantly affects the state of the other, no matter how far apart they are. This seems to defy the idea that nothing can travel faster than light, but it's been proven to be a real phenomenon.
+
+
+Quantum mechanics also introduces"
+14,9.401868365180466,58.72634111818826,17.444444444444443,1.5414012738853504,157,"Please explain quantum mechanics at a 14th grade reading level. Quantum mechanics is a branch of physics that deals with the behavior of very small particles, like atoms and photons (particles of light). It's different from the physics we see in our everyday world because it follows different rules.
+
+
+One of the key ideas in quantum mechanics is that particles can exist in multiple states at once, a concept known as superposition. For example, an electron in an atom can spin both clockwise and counterclockwise at the same time. It's only when we measure the electron's spin that it 'chooses' one state.
+
+
+Another important concept is entanglement. This is when two particles become linked, and the state of one instantly affects the state of the other, no matter how far apart they are. This seems to defy the idea that nothing can travel faster than light, but it's been proven to be a real phenomenon.
+
+
+Quantum mechan"
+15,11.23420597484277,49.91847877358492,19.875,1.6163522012578617,159,"Please explain quantum mechanics at a 15th grade reading level. Quantum mechanics is a branch of physics that deals with the behavior of very small particles, like atoms and photons (particles of light). It's different from the physics we see in our everyday world because it operates under a set of rules that can seem strange and counterintuitive.
+
+
+One of the key ideas in quantum mechanics is that particles can exist in multiple states at once, a concept known as superposition. For example, an electron in an atom doesn't have a definite position or speed but is described by a probability cloud that shows where it's likely to be found.
+
+
+Another important concept is entanglement, where two particles become linked and the state of one instantly influences the state of the other, no matter how far apart they are. This has been described as ""spooky action at a distance"" by Albert Einstein.
+
+
+Quantum mechanics also introduces the idea of"
+16,10.005848670756649,55.58351056578053,18.11111111111111,1.5705521472392638,163,"Please explain quantum mechanics at a 16th grade reading level. Quantum mechanics is a branch of physics that deals with the very small particles that make up the universe, like atoms and photons (particles of light). It's different from the physics we learn in everyday life because it shows that these tiny particles can behave in strange and unexpected ways.
+
+
+One of the key ideas in quantum mechanics is that particles can exist in multiple states at once, a concept known as superposition. For example, an electron in an atom can spin both clockwise and counterclockwise at the same time. It's only when we measure the electron's spin that it 'chooses' one state.
+
+
+Another important idea is called entanglement. This is when two particles become linked, and the state of one instantly affects the state of the other, no matter how far apart they are. This seems to go against our everyday experience, where objects don't affect each other instantly over long distances"
+17,8.644057649667406,59.643736141906885,14.909090909090908,1.5609756097560976,164,"Please explain quantum mechanics at a 17th grade reading level. Quantum mechanics is a branch of physics that deals with the very small particles that make up the universe, like atoms and photons (particles of light). Unlike the things we see in our everyday life, these tiny particles behave in ways that can seem strange and counterintuitive.
+
+
+One of the key ideas in quantum mechanics is that these particles can exist in multiple states at the same time. This is different from our usual experience where things have one specific state. For example, a particle can be in two places at once or have two different speeds simultaneously. This is known as superposition.
+
+
+Another important concept is that of ""quantum entanglement."" This is when two particles become linked, and the state of one instantly affects the state of the other, no matter how far apart they are. This seems to defy the normal rules of how things work in our world.
+
+
+Quantum mechanics also"
+18,8.422320754716985,62.99838679245285,15.9,1.509433962264151,159,"Please explain quantum mechanics at a 18th grade reading level. Quantum mechanics is a branch of physics that deals with the very small particles that make up the universe, like atoms and photons (particles of light). Unlike the things we see in our everyday life, these tiny particles behave in ways that can seem strange and counterintuitive.
+
+
+One of the key ideas in quantum mechanics is that these particles can exist in multiple states at the same time. This is called superposition. For example, an electron in an atom can spin both clockwise and counterclockwise at the same time. It's only when we measure the electron's spin that it 'chooses' one state.
+
+
+Another important concept is entanglement. This is when two particles become linked, and the state of one instantly affects the state of the other, no matter how far apart they are. This seems to defy the idea that nothing can travel faster than the speed of light.
+
+
+"
+19,8.666088757396448,63.03179585798817,16.9,1.4970414201183433,169,"Please explain quantum mechanics at a 19th grade reading level. Quantum mechanics is a branch of physics that deals with the very small particles that make up the universe, like atoms and photons (particles of light). Unlike the things we see in our everyday life, these tiny particles behave in ways that can seem strange and even magical.
+
+
+One of the key ideas in quantum mechanics is that these particles can exist in multiple states at the same time. This is different from our usual experience where things have one specific state. For example, a particle can be in two places at once or have two different speeds at the same time. This is called superposition.
+
+
+Another important concept is that of ""quantum entanglement."" This is when two particles become linked in such a way that the state of one particle instantly affects the state of the other, no matter how far apart they are. This seems to defy the normal rules of how things work in our world.
+
+
+"
+20,9.009944785276073,59.49786196319022,16.3,1.5460122699386503,163,"Please explain quantum mechanics at a 20th grade reading level. Quantum mechanics is a branch of physics that deals with the very small particles that make up the universe, like atoms and photons (particles of light). Unlike the things we see in our everyday life, these tiny particles behave in ways that can seem strange and counterintuitive.
+
+
+One of the key ideas in quantum mechanics is that these particles can exist in multiple states at the same time. This is different from our usual experience where an object can only be in one place at one time. For example, an electron in an atom can spin both clockwise and counterclockwise at the same time.
+
+
+Another important concept is that of ""superposition."" This means that a particle can be in two places at once. Imagine if you could be in two different rooms at the same time; that's what superposition is like for particles.
+
+
+Quantum mechanics also tells us that particles can be ""entang"
