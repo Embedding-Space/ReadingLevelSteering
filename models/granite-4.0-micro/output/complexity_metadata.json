@@ -1,0 +1,8 @@
+{
+  "model_name": "ibm-granite/granite-4.0-micro",
+  "num_pairs": 20,
+  "data_source": "Wikipedia pairs (Simple vs Regular)",
+  "num_layers": 40,
+  "device": "mps",
+  "seed": 42
+}
