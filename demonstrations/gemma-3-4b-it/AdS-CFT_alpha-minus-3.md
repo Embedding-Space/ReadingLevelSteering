@@ -1,6 +1,4 @@
-
 ```
-❯ uv run interactively_prompt.py -a -3.0 "What is AdS/CFT correspondence?" --max-tokens=1024
 Loading model: google/gemma-3-4b-it...
 ✓ Model loaded on mps
 
@@ -14,6 +12,14 @@ Max tokens: 1024
 ================================================================================
 
 Generating...
+
+================================================================================
+METRICS
+================================================================================
+Flesch-Kincaid Grade: 7.7
+Reading Ease: 68.5
+Avg Sentence Length: 15.9 words
+================================================================================
 
 ================================================================================
 OUTPUT
@@ -30,7 +36,7 @@ The AdS/CFT correspondence says that a theory of gravity in a space called Anti-
 
 **1.  Anti-de Sitter Space (AdS):**
 
-* **What it is:**  AdS is a special type of space.  Imagine a space that's like a big, squished donut.  It's *curved* in a way that makes it look like it's bending *inward* towards a point in the middle.
+* **What it is:**  AdS is a special type of space.  Imagine a space that's like a big, squished donut.  It's *curved* in a way that makes it look like it's bending *inward* towards a point in the middle.  
 * **Important Property:**  It has a *negative*  “curved” space.  This is really important.  It's not the same as our everyday space, which is flat (or has positive gravity).
 * **Think of it like:**  Imagine a ball with a really big hole in it.  The space inside the hole is like the inside of an AdS space.
 * **How it's used:**  It's a good place to study gravity because it's easy to work with mathematically.
@@ -63,3 +69,4 @@ The AdS/CFT correspondence says that a theory of gravity in a space called Anti-
 **Resources to Learn More:**
 
 * **Wikipedia:** [https://en.wikipedia.org/wiki/AdS/CFT_correspondence](https://en.wikipedia.org/wiki/Ads/CFT_correspondence)
+* **YouTube -  "What is the AdS/CFT Correspondence?" by  Sean  McM****a****n:** [https

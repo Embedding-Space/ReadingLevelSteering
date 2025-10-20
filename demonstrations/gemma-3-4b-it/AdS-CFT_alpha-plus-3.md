@@ -1,6 +1,4 @@
-
 ```
-❯ uv run interactively_prompt.py -a +3.0 "What is AdS/CFT correspondence?" --max-tokens=1024
 Loading model: google/gemma-3-4b-it...
 ✓ Model loaded on mps
 
@@ -14,6 +12,14 @@ Max tokens: 1024
 ================================================================================
 
 Generating...
+
+================================================================================
+METRICS
+================================================================================
+Flesch-Kincaid Grade: 16.5
+Reading Ease: 8.8
+Avg Sentence Length: 18.1 words
+================================================================================
 
 ================================================================================
 OUTPUT
@@ -73,3 +79,4 @@ Provenance of the conjecture: Maldacena's initial derivation relied on a specifi
 **Resources for further exploration:**
 
 * **Maldacena's seminal paper:**
+
