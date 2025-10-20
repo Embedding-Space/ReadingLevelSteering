@@ -1,0 +1,8 @@
+{
+  "model_name": "Qwen/Qwen3-0.6B",
+  "num_pairs": 20,
+  "data_source": "Wikipedia pairs (Simple vs Regular)",
+  "num_layers": 28,
+  "device": "mps",
+  "seed": 42
+}
