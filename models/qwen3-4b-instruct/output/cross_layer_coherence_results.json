@@ -1,0 +1,10 @@
+{
+  "mean_pairwise_similarity": 0.6034027338027954,
+  "std_pairwise_similarity": 0.23650133609771729,
+  "min_pairwise_similarity": 0.050270844250917435,
+  "max_pairwise_similarity": 0.9823777675628662,
+  "median_pairwise_similarity": 0.6124914288520813,
+  "mean_similarity_to_centroid": 0.7838490009307861,
+  "mean_angular_deviation_degrees": 36.94245910644531,
+  "centroid_norm_before_normalization": 0.7838490009307861
+}
