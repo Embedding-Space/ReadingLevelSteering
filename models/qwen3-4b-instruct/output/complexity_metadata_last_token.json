@@ -1,0 +1,9 @@
+{
+  "model_name": "Qwen/Qwen3-4B-Instruct-2507",
+  "num_pairs": 20,
+  "data_source": "Wikipedia pairs (Simple vs Regular)",
+  "extraction_method": "last_token_only",
+  "num_layers": 36,
+  "device": "mps",
+  "seed": 42
+}
