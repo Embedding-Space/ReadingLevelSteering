@@ -62,6 +62,38 @@ And when you *look* at it, it suddenly "chooses" one place. That’s kind of lik
 --------------------------------------------------------------------------------
 
 
+EXAMPLE 3: Requested High School Senior Level (12th grade)
+--------------------------------------------------------------------------------
+Requested grade level: 12th grade
+Actual Flesch-Kincaid grade: 8.64
+Deviation: -3.36 grades
+Reading Ease: 61.58
+Avg sentence length: 16.0 words
+Avg syllables per word: 1.52
+
+FULL RESPONSE:
+--------------------------------------------------------------------------------
+user
+Please explain quantum mechanics at a 12th grade reading level.
+assistant
+Sure! Here's a simple explanation of quantum mechanics at a 12th-grade reading level:
+
+---
+
+**What is Quantum Mechanics?**
+
+Quantum mechanics is a branch of physics that explains how the smallest things in the universe — like atoms, electrons, and photons (tiny particles of light) — behave. It’s different from the physics we learn in everyday life, like how a ball rolls or a car moves. At the tiny scale, things don’t follow the usual rules.
+
+Here are some key ideas in quantum mechanics, explained simply:
+
+1. **Particles Can Act Like Waves**  
+   You might think of a particle (like an electron) as a tiny dot, like a marble. But in quantum mechanics, electrons can also act like waves — like ripples in water. This means they can spread out and pass through two slits at once, creating patterns that only waves can make.
+
+2. **Quantum Superposition**  
+   Before we measure something (like an electron’s
+--------------------------------------------------------------------------------
+
+
 SUMMARY STATISTICS
 ================================================================================
 Total prompts tested: 16
