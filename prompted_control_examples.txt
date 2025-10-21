@@ -1,0 +1,74 @@
+================================================================================
+PROMPTED CONTROL FAILURE: EXAMPLE QUOTES FOR NARRATIVE
+Model: Qwen 3 4B Instruct
+================================================================================
+
+EXAMPLE 1: Requested Graduate-Level, Got Middle School
+--------------------------------------------------------------------------------
+Requested grade level: 20th grade
+Actual Flesch-Kincaid grade: 7.57
+Deviation: -12.43 grades
+Reading Ease: 67.82
+Avg sentence length: 15.2 words
+Avg syllables per word: 1.46
+
+FULL RESPONSE:
+--------------------------------------------------------------------------------
+user
+Please explain quantum mechanics at a 20th grade reading level.
+assistant
+Sure! Here's a simple explanation of quantum mechanics at a 20th-grade reading level:
+
+---
+
+**What is Quantum Mechanics?**
+
+Quantum mechanics is a branch of physics that explains how the tiny little things in the universe — like atoms, electrons, and photons (tiny bits of light) — behave. It’s different from the physics we learn in everyday life, like how a ball rolls or a car moves.
+
+In our daily world, things have definite positions and speeds. For example, a ball is in one place, and we can say exactly how fast it’s going. But at the tiniest level — like inside an atom — things don’t work that way.
+
+Here are a few strange but true ideas from quantum mechanics:
+
+1. **Particles can act like waves**  
+   Tiny particles like electrons don’t just move in straight lines. They can also behave like waves — spreading out and going through multiple paths at once. It’s like a drop of water can spread out
+--------------------------------------------------------------------------------
+
+
+EXAMPLE 2: Requested Elementary School
+--------------------------------------------------------------------------------
+Requested grade level: 5th grade
+Actual Flesch-Kincaid grade: 5.45
+Deviation: 0.45 grades
+Reading Ease: 83.02
+Avg sentence length: 15.2 words
+Avg syllables per word: 1.28
+
+FULL RESPONSE:
+--------------------------------------------------------------------------------
+user
+Please explain quantum mechanics at a 5th grade reading level.
+assistant
+Sure! Let's talk about quantum mechanics — but in a way that's super simple, like you're 5 years old.
+
+Imagine you have a tiny, tiny toy — so small you can’t see it with your eyes. This tiny toy is called a "particle," like an atom or a tiny piece of matter.
+
+Now, in the regular world (like your toys or a ball), things have definite positions. Like, a ball is *here*, and it doesn’t move unless you push it.
+
+But in the quantum world — the world of super tiny things — things are a little weird. They don’t always have a fixed place. Instead, they can be in *more than one place at the same time* — like a tiny magic ball that can be in two spots at once, until you look!
+
+And when you *look* at it, it suddenly "chooses" one place. That’s kind of like a magic trick — the thing changes when you watch it.
+
+
+--------------------------------------------------------------------------------
+
+
+SUMMARY STATISTICS
+================================================================================
+Total prompts tested: 16
+Requested grade range: 5 to 20
+Actual FK grade range: 5.45 to 8.64
+Mean actual FK grade: 7.28
+Std dev of actual FK grade: 0.91
+Mean deviation: -5.22
+Largest positive deviation: 1.76 (requested 6, got 7.76)
+Largest negative deviation: -12.43 (requested 20, got 7.57)
