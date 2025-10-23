@@ -1,0 +1,19 @@
+\begin{table}[h]
+\centering
+\caption{Linear Regression Analysis of Reading-Level Steering Across Model Architectures}
+\label{tab:model_comparison}
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Model} & \textbf{Parameters} & \textbf{R²} & \textbf{p-value} & \textbf{Slope} & \textbf{Intercept} & \textbf{n} \\
+\hline
+Granite 4.0 Micro & 400M & 0.3934 & $9.37 \times 10^{-5}$ & 4.061 & 20.8 & 33 \\
+Qwen 3 0.6B & 625M & 0.3619 & $2.13 \times 10^{-4}$ & 1.794 & 11.84 & 33 \\
+Llama 3.2 1B Instruct & 1.2B & 0.1851 & 0.0125 & 3.698 & 17.42 & 33 \\
+Qwen 3 1.7B & 2.0B & 0.677 & $4.22 \times 10^{-9}$ & 1.713 & 10.34 & 33 \\
+Llama 3.2 3B Instruct & 3.2B & 0.0251 & 0.3788 & 1.998 & 26.77 & 33 \\
+Phi-3 Mini 4K Instruct & 3.8B & 0.5692 & $4.48 \times 10^{-8}$ & 1.901 & 16.17 & 38 \\
+Gemma 3 4B IT & 4.0B & 0.8485 & $3.04 \times 10^{-14}$ & 0.931 & 10.54 & 33 \\
+Qwen 3 4B Instruct & 4.3B & 0.8963 & $<10^{-15}$ & 1.283 & 11.92 & 33 \\
+\hline
+\end{tabular}
+\end{table}
