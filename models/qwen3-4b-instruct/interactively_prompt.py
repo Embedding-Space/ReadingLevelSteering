@@ -145,8 +145,14 @@ def main():
     parser.add_argument(
         '--alpha', '-a',
         type=float,
-        default=0.0,
+        default=None,
         help='Steering strength (α). Negative = simpler, Positive = more complex (default: 0.0)'
+    )
+    parser.add_argument(
+        '--grade-level', '-g',
+        type=float,
+        default=None,
+        help='Target Flesch-Kincaid grade level (e.g., 6.0 for 6th grade, 12.0 for high school). Mutually exclusive with --alpha.'
     )
     parser.add_argument(
         '--layer', '-l',
@@ -168,6 +174,23 @@ def main():
     )
 
     args = parser.parse_args()
+
+    # Validate alpha vs grade-level
+    if args.alpha is not None and args.grade_level is not None:
+        parser.error("Cannot specify both --alpha and --grade-level. Choose one.")
+
+    # Compute alpha from grade level if needed
+    if args.grade_level is not None:
+        # Linear regression model: FK_grade = slope * alpha + intercept
+        # From complexity vectors: y = 1.28α + 11.9 (R² = 0.896)
+        # Solving for alpha: alpha = (FK_grade - intercept) / slope
+        REGRESSION_SLOPE = 1.28
+        REGRESSION_INTERCEPT = 11.9
+        args.alpha = (args.grade_level - REGRESSION_INTERCEPT) / REGRESSION_SLOPE
+        print(f"Target grade level {args.grade_level:.1f} → α = {args.alpha:+.3f}\n")
+    elif args.alpha is None:
+        # Default to no steering
+        args.alpha = 0.0
 
     # Load model and vector
     model, tokenizer = load_model_and_tokenizer()
